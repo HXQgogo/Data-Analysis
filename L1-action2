@@ -1,0 +1,13 @@
+#统计全班的成绩
+import pandas as pd
+from pandas import Series,DataFrame
+import numpy as np
+x1={'语文':[68,95,98,90,80],'数学':[65,76,86,88,90],'英语':[30,98,88,77,90]}
+df1=DataFrame(x1,index=['张飞','关羽','刘备','典韦','许诸'],columns=['语文','数学','英语'])
+x1=['张飞','关羽','刘备','典韦','许诸']
+print(df1.describe())
+print(df1)
+#添加和计算新列
+df1['Row_sum'] = df1.apply(lambda x: x.sum(),axis=1)
+#把这些人的总成绩排序，得出名次进行成绩输出
+print(df1.sort_values('Row_sum',ascending=False))

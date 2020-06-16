@@ -1,0 +1,14 @@
+#对汽车质量数据进行统计,品牌投诉总数，车型投诉总数哪个品牌的平均车型投诉最多
+import numpy as np
+import pandas as pd
+x1=pd.read_csv("car_complain.csv")
+df1=pd.DataFrame(x1)
+df2=df1.drop('problem', 1).join(df1.problem.str.get_dummies(','))
+tags=df2.columns[7:]
+df3= df2.groupby(['brand'])[tags].agg(['sum'])
+df4=df2.groupby(['brand'])['id'].agg(['count'])
+df5=df4.merge(df3,left_index=True, right_index=True, how='left')
+df5.reset_index(inplace=True)
+df5.sort_values('count',ascending=False)
+quary=('A11','sum')
+print(df5.sort_values(quary,ascending=False))

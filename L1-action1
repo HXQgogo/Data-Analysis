@@ -1,0 +1,3 @@
+#计算2+4+6+8+...+100的求和
+import numpy as np
+sum(np.arange(2,102,2))
